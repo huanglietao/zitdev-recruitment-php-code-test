@@ -57,12 +57,31 @@ class ProductHandlerTest extends TestCase
 
     public function testGetTotalPrice()
     {
-        $totalPrice = 0;
-        foreach ($this->products as $product) {
-            $price = $product['price'] ?: 0;
-            $totalPrice += $price;
-        }
+        $handler = new ProductHandler();
+        //$res = $handler->getTotalPrice($this->products);
+        $this->assertEquals(143, $handler->getTotalPrice($this->products));
+    }
+    public function testGetDessertProduct()
+    {
+        $handler = new ProductHandler();
+        $res = [
+            [
+                'id' => 5,
+                'name' => 'New York Cheese Cake',
+                'type' => 'Dessert',
+                'price' => 40,
+                'create_at' => '2021-04-19 14:38:00',
+            ],
+            [
+                'id' => 4,
+                'name' => 'Cup cake',
+                'type' => 'Dessert',
+                'price' => 35,
+                'create_at' => '2021-04-18 08:45:00',
+            ],
+        ];
+        //$res = $handler->getDessertProduct($this->products);
 
-        $this->assertEquals(143, $totalPrice);
+        $this->assertEquals($res, $handler->getDessertProduct($this->products));
     }
 }
